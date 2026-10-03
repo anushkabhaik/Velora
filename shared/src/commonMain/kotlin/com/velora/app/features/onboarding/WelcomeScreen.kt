@@ -1,5 +1,6 @@
 package com.velora.app.features.onboarding
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,13 +18,15 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.velora.app.components.VeloraButton
 import com.velora.app.core.design.VeloraColors
 import com.velora.app.core.design.VeloraDimensions
+import org.jetbrains.compose.resources.painterResource
+import velora.shared.generated.resources.Res
+import velora.shared.generated.resources.velora_logo
 
 @Composable
 fun WelcomeScreen(
@@ -48,31 +52,16 @@ fun WelcomeScreen(
             verticalArrangement = Arrangement.Center
         ) {
 
-            Text(
-                text = "✦",
-                fontSize = 28.sp,
-                color = VeloraColors.Sage
+            Image(
+                painter = painterResource(Res.drawable.velora_logo),
+                contentDescription = "Velora",
+                modifier = Modifier.size(280.dp),
+                contentScale = ContentScale.Fit
             )
 
             Spacer(
                 modifier = Modifier.height(
-                    VeloraDimensions.SpaceMD
-                )
-            )
-
-            Text(
-                text = "VELORA",
-                style = MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    letterSpacing = 5.sp
-                ),
-                color = MaterialTheme.colorScheme.primary,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(
-                modifier = Modifier.height(
-                    VeloraDimensions.SpaceXXL
+                    VeloraDimensions.SpaceSM
                 )
             )
 
