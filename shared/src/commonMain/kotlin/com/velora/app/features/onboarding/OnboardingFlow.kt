@@ -21,6 +21,7 @@ fun OnboardingFlow(
     when (currentStep) {
 
         OnboardingStep.NAME -> {
+
             NameScreen(
                 name = onboardingState.name,
 
@@ -39,6 +40,7 @@ fun OnboardingFlow(
         }
 
         OnboardingStep.INTENTION -> {
+
             IntentionScreen(
                 selectedIntention = onboardingState.intention,
 
@@ -59,6 +61,7 @@ fun OnboardingFlow(
         }
 
         OnboardingStep.FOCUS_AREAS -> {
+
             FocusAreasScreen(
                 selectedAreas = onboardingState.focusAreas,
 
@@ -86,12 +89,63 @@ fun OnboardingFlow(
             )
         }
 
-        else -> {
+        OnboardingStep.DAILY_RHYTHM -> {
+
+            DailyRhythmScreen(
+                selectedTime = onboardingState.preferredTime,
+
+                onTimeSelected = { time ->
+                    onboardingState = onboardingState.copy(
+                        preferredTime = time
+                    )
+                },
+
+                onBack = {
+                    currentStep = OnboardingStep.FOCUS_AREAS
+                },
+
+                onContinue = {
+                    currentStep = OnboardingStep.INTERESTS
+                }
+            )
+        }
+
+        OnboardingStep.INTERESTS -> {
+
+            InterestsScreen(
+                selectedInterests = onboardingState.interests,
+
+                onInterestToggle = { interest ->
+
+                    val updatedInterests =
+                        if (interest in onboardingState.interests) {
+                            onboardingState.interests - interest
+                        } else {
+                            onboardingState.interests + interest
+                        }
+
+                    onboardingState = onboardingState.copy(
+                        interests = updatedInterests
+                    )
+                },
+
+                onBack = {
+                    currentStep = OnboardingStep.DAILY_RHYTHM
+                },
+
+                onComplete = {
+                    currentStep = OnboardingStep.COMPLETE
+                }
+            )
+        }
+
+        OnboardingStep.COMPLETE -> {
+
             ComingSoonOnboardingScreen(
                 name = onboardingState.name,
 
                 onBack = {
-                    currentStep = OnboardingStep.FOCUS_AREAS
+                    currentStep = OnboardingStep.INTERESTS
                 }
             )
         }
