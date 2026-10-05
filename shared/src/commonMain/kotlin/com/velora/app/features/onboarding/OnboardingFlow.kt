@@ -1,0 +1,50 @@
+package com.velora.app.features.onboarding
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+
+@Composable
+fun OnboardingFlow(
+    onBackToWelcome: () -> Unit
+) {
+    var onboardingState by remember {
+        mutableStateOf(OnboardingState())
+    }
+
+    var currentStep by remember {
+        mutableStateOf(OnboardingStep.NAME)
+    }
+
+    when (currentStep) {
+
+        OnboardingStep.NAME -> {
+            NameScreen(
+                name = onboardingState.name,
+
+                onNameChange = { newName ->
+                    onboardingState = onboardingState.copy(
+                        name = newName
+                    )
+                },
+
+                onBack = onBackToWelcome,
+
+                onContinue = {
+                    currentStep = OnboardingStep.INTENTION
+                }
+            )
+        }
+
+        else -> {
+            ComingSoonOnboardingScreen(
+                name = onboardingState.name,
+                onBack = {
+                    currentStep = OnboardingStep.NAME
+                }
+            )
+        }
+    }
+}
