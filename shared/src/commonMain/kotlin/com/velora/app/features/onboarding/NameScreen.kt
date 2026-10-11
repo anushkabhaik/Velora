@@ -117,7 +117,11 @@ fun NameScreen(
 
             VeloraTextField(
                 value = name,
-                onValueChange = onNameChange,
+                onValueChange = { newValue ->
+                    if (newValue.length <= 40) {
+                        onNameChange(newValue)
+                    }
+                },
                 placeholder = "Your name",
                 modifier = Modifier.fillMaxWidth()
             )

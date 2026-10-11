@@ -35,6 +35,10 @@ fun OnboardingFlow(
                 onBack = onBackToWelcome,
 
                 onContinue = {
+                    onboardingState = onboardingState.copy(
+                        name = onboardingState.name.trim()
+                    )
+
                     currentStep = OnboardingStep.INTENTION
                 }
             )
@@ -150,7 +154,13 @@ fun OnboardingFlow(
                 },
 
                 onEnterVelora = {
-                    onOnboardingComplete(onboardingState)
+                    val completedState = onboardingState.copy(
+                        name = onboardingState.name.trim(),
+                        focusAreas = onboardingState.focusAreas.toSet(),
+                        interests = onboardingState.interests.toSet()
+                    )
+
+                    onOnboardingComplete(completedState)
                 }
             )
         }

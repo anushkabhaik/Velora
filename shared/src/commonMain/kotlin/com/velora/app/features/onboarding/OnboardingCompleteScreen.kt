@@ -24,9 +24,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.velora.app.components.VeloraButton
-import com.velora.app.components.VeloraSelectableChip
 import com.velora.app.core.design.VeloraColors
 import com.velora.app.core.design.VeloraDimensions
+import com.velora.app.components.VeloraTag
 
 @Composable
 fun OnboardingCompleteScreen(
@@ -122,10 +122,8 @@ fun OnboardingCompleteScreen(
                     )
                 ) {
                     onboardingState.focusAreas.forEach { area ->
-                        VeloraSelectableChip(
-                            text = area,
-                            selected = true,
-                            onClick = {}
+                        VeloraTag(
+                            text = area
                         )
                     }
                 }
@@ -167,10 +165,8 @@ fun OnboardingCompleteScreen(
                     )
                 ) {
                     onboardingState.interests.forEach { interest ->
-                        VeloraSelectableChip(
-                            text = interest,
-                            selected = true,
-                            onClick = {}
+                        VeloraTag(
+                            text = interest
                         )
                     }
                 }
