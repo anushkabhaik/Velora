@@ -41,6 +41,14 @@ fun App() {
                 OnboardingFlow(
                     onBackToWelcome = {
                         currentScreen = AppScreen.WELCOME
+                    },
+
+                    onOnboardingComplete = { onboardingState ->
+                        // Milestone 3 will persist this state
+                        // and continue into account creation/authentication.
+                        println(
+                            "Onboarding completed for ${onboardingState.name}"
+                        )
                     }
                 )
             }

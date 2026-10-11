@@ -8,7 +8,8 @@ import androidx.compose.runtime.setValue
 
 @Composable
 fun OnboardingFlow(
-    onBackToWelcome: () -> Unit
+    onBackToWelcome: () -> Unit,
+    onOnboardingComplete: (OnboardingState) -> Unit
 ) {
     var onboardingState by remember {
         mutableStateOf(OnboardingState())
@@ -141,11 +142,15 @@ fun OnboardingFlow(
 
         OnboardingStep.COMPLETE -> {
 
-            ComingSoonOnboardingScreen(
-                name = onboardingState.name,
+            OnboardingCompleteScreen(
+                onboardingState = onboardingState,
 
                 onBack = {
                     currentStep = OnboardingStep.INTERESTS
+                },
+
+                onEnterVelora = {
+                    onOnboardingComplete(onboardingState)
                 }
             )
         }
